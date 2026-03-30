@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+<meta charset="UTF-8">
+<title>SMART TN PRO</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+    color: white;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 220px;
+    height: 100vh;
+    background: rgba(0,0,0,0.6);
+    position: fixed;
+    padding: 20px;
+}
+
+.sidebar h2 {
+    text-align: center;
+}
+
+.sidebar p {
+    font-size: 14px;
+    opacity: 0.7;
+}
+
+/* Main */
+.main {
+    margin-left: 240px;
+    padding: 20px;
+}
+
+.card {
+    background: rgba(255,255,255,0.08);
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+input, select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    margin: 5px 0;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(45deg,#00c6ff,#0072ff);
+    border: none;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.result {
+    background: rgba(0,0,0,0.4);
+    padding: 20px;
+    border-radius: 12px;
+}
+
+/* Status colors */
+.red {color:#ff4d4d;}
+.green {color:#28a745;}
+.blue {color:#00c6ff;}
+</style>
+</head>
+
+<body>
+
+<div class="sidebar">
+<h2>SMART TN</h2>
+<p>Railway Cargo System</p>
+<hr>
+<p>✔ Автомат тооцоо</p>
+<p>✔ Техникийн нөхцөл</p>
+<p>✔ Овор шалгалт</p>
+</div>
+
+<div class="main">
+
+<div class="card">
+<h2>📥 АЧААНЫ МЭДЭЭЛЭЛ</h2>
+
+<div class="grid">
+<div>
+<label>Урт (м)</label>
+<input id="L" type="number">
+
+<label>Өргөн (м)</label>
+<input id="W" type="number">
+</div>
+
+<div>
+<label>Өндөр (м)</label>
+<input id="H" type="number">
+
+<label>Жин (тн)</label>
+<input id="m" type="number">
+</div>
+</div>
+
+<button onclick="calc()">⚙ ТООЦОО</button>
+</div>
+
+<div class="card result" id="out">
+👉 Үр дүн энд
+</div>
+
+</div>
+
+<script>
+function calc(){
+let L = L = parseFloat(document.getElementById("L").value);
+let W = parseFloat(document.getElementById("W").value);
+let H = parseFloat(document.getElementById("H").value);
+let m = parseFloat(document.getElementById("m").value);
+
+let status = (W > 3.25) ? "Овор ихтэй" : "Энгийн";
+let color = (W > 3.25) ? "red" : "green";
+
+let F = m * 1.5 * 1.5;
+let chains = Math.ceil(F / 10);
+
+document.getElementById("out").innerHTML = `
+<h2>📊 ҮР ДҮН</h2>
+Габарит: <span class="${color}">${status}</span><br>
+Хүч: ${F.toFixed(2)}<br>
+Гинж: ${chains}<br>
+`;
+}
+</script>
+
+</body>
+</html>
